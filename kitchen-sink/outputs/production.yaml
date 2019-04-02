@@ -1,16 +1,29 @@
 apiVersion: v1
 data:
-  from-literal: "true"
-  nginx-config.txt: |-
-    ENABLED=true
-    PORT:8080
+  host: http://someurl
+  password: somePasswordHere
 kind: ConfigMap
 metadata:
   annotations:
     newCommonAnnotation: common-annotation
   labels:
     newCommonLabel: common-label
-  name: prod-prefix-nginx-configmap-prod-suffix-d575998229
+  name: prod-prefix-nginx-configmap-env-prod-suffix-bdfg8dhdb6
+  namespace: common-namespace
+---
+apiVersion: v1
+data:
+  from-literal: "true"
+  nginx-config.txt: |-
+    enabled=true
+    host:example.com
+kind: ConfigMap
+metadata:
+  annotations:
+    newCommonAnnotation: common-annotation
+  labels:
+    newCommonLabel: common-label
+  name: prod-prefix-nginx-configmap-prod-suffix-99g67t78dt
   namespace: common-namespace
 ---
 apiVersion: v1
@@ -79,7 +92,11 @@ spec:
         newCommonLabel: common-label
     spec:
       containers:
-      - image: my-registry/nginx:2.0.0
+      - command:
+        - start
+        - --host
+        - http://someurl
+        image: my-registry/nginx:2.0.0
         name: nginx
         ports:
         - containerPort: 12345

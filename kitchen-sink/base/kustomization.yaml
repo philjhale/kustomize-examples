@@ -20,6 +20,8 @@ configMapGenerator:
     - nginx-config.txt
   literals:	
     - from-literal=true
+- name: nginx-configmap-env
+  env: env.txt
 
 # Create a Secret resource
 secretGenerator:
@@ -34,16 +36,12 @@ secretGenerator:
     - password=literal-password
     - host=liternal-host
 
-
-# vars:
-#   - name: WORDPRESS_SERVICE
-#     objref:
-#       kind: Service
-#       name: wordpress
-#       apiVersion: v1
-#   - name: MYSQL_SERVICE
-#     objref:
-#       kind: Service
-#       name: mysql
-#       apiVersion: v1
-
+# See https://github.com/kubernetes-sigs/kustomize/blob/master/docs/kustomization.yaml
+vars:
+  - name: MY_SERVICE_NAME
+    objref:
+      kind: ConfigMap
+      name: nginx-configmap-env
+      apiVersion: v1
+    fieldref:
+        fieldpath: data.host
