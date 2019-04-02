@@ -10,7 +10,7 @@ configMapGenerator:
 - name: example-configmap
   behavior: merge
   files:
-  - development.properties
+  - env.properties
 
 bases:
 - ../../base

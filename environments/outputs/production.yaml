@@ -3,12 +3,12 @@ data:
   common.properties: |-
     port=80
     logLevel=verbose
-  production.properties: host=production.example.com
+  env.properties: host=production.example.com
 kind: ConfigMap
 metadata:
   annotations: {}
   labels: {}
-  name: prod-example-configmap-f2dhg679gt
+  name: prod-example-configmap-ck85ffhmkk
 ---
 apiVersion: apps/v1
 kind: Deployment

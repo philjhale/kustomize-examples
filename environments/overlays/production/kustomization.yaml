@@ -11,7 +11,7 @@ configMapGenerator:
 - name: example-configmap
   behavior: merge
   files:
-  - production.properties
+  - env.properties
 
 bases:
 - ../../base
