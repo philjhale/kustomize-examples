@@ -1,0 +1,31 @@
+# Prepend this on all resource names
+namePrefix: prod-prefix-
+
+# Append this on all resource names
+nameSuffix: -prod-suffix
+
+# Alter the source yaml using a partial specification of a k8s resource.
+# The default action is replace. Others supported include merge and delete
+# See https://github.com/kubernetes/community/blob/master/contributors/devel/sig-api-machinery/strategic-merge-patch.md
+patchesStrategicMerge:
+- replica-count.yaml
+
+# Supports a similar operations to patchesStrategicMerge but the syntax is more terse
+# See https://tools.ietf.org/html/rfc6902
+# and https://github.com/kubernetes-sigs/kustomize/blob/master/examples/jsonpatch.md
+patchesJson6902:
+- target:
+    group: apps
+    version: v1
+    kind: Deployment
+    name: nginx-deployment
+  path: change-port.yaml
+
+# Replace the image with the matching name
+images:
+  - name: nginx
+    newName: my-registry/nginx
+    newTag: 2.0.0
+
+bases:
+- ../../base

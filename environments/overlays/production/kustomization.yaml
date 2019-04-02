@@ -1,0 +1,10 @@
+# Prepend this on all resource names
+namePrefix: prod-
+
+# Patch the partial resource definitions into the base
+patchesStrategicMerge:
+- replica-count-prod.yaml
+- encryption.yaml
+
+bases:
+- ../../base

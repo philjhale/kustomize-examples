@@ -1,0 +1,57 @@
+apiVersion: v1
+data:
+  nginx-config.txt: |-
+    ENABLED=true
+    PORT:8080
+kind: ConfigMap
+metadata:
+  annotations:
+    newCommonAnnotation: common-annotation
+  labels:
+    newCommonLabel: common-label
+  name: prod-prefix-nginx-configmap-prod-suffix-kf9574f82m
+  namespace: common-namespace
+---
+apiVersion: v1
+data:
+  PASSWORD: c29tZVBhc3N3b3JkSGVyZQ==
+  URL: aHR0cDovL3NvbWV1cmw=
+kind: Secret
+metadata:
+  annotations:
+    newCommonAnnotation: common-annotation
+  labels:
+    newCommonLabel: common-label
+  name: prod-prefix-env_file_secret-prod-suffix-cht55bm8hb
+  namespace: common-namespace
+type: Opaque
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    newCommonAnnotation: common-annotation
+  labels:
+    app: nginx
+    newCommonLabel: common-label
+  name: prod-prefix-nginx-deployment-prod-suffix
+  namespace: common-namespace
+spec:
+  replicas: 100
+  selector:
+    matchLabels:
+      app: nginx
+      newCommonLabel: common-label
+  template:
+    metadata:
+      annotations:
+        newCommonAnnotation: common-annotation
+      labels:
+        app: nginx
+        newCommonLabel: common-label
+    spec:
+      containers:
+      - image: my-registry/nginx:2.0.0
+        name: nginx
+        ports:
+        - containerPort: 12345

@@ -1,0 +1,9 @@
+# Prepend this on all resource names
+namePrefix: dev-
+
+# Patch the partial resource definitions into the base
+patchesStrategicMerge:
+- replica-count-dev.yaml
+
+bases:
+- ../../base

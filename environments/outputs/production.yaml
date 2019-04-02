@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx
+  name: prod-nginx-deployment
+spec:
+  replicas: 100
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - image: jrcs/letsencrypt-nginx-proxy-companion
+        name: letsencrypt-nginx
+      - image: nginx:1.7.9
+        name: nginx
+        ports:
+        - containerPort: 80

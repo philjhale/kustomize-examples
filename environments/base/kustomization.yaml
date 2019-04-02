@@ -1,0 +1,3 @@
+# List all source resources here. These will not be changed
+resources:
+- nginx-deployment.yaml
