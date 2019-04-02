@@ -1,7 +1,9 @@
 # Prepend this on all resource names
 namePrefix: dev-
 
-# Patch the partial resource definitions into the base
+# Alter the source yaml using a partial specification of a k8s resource.
+# The default action is replace. Others supported include merge and delete
+# See https://github.com/kubernetes/community/blob/master/contributors/devel/sig-api-machinery/strategic-merge-patch.md
 patchesStrategicMerge:
 - replica-count-dev.yaml
 

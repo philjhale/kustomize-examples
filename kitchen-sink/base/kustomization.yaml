@@ -13,15 +13,28 @@ commonLabels:
 resources:
 - nginx-deployment.yaml
 
+# Create a Config Map from a combination of values in a file and literals
 configMapGenerator:
 - name: nginx-configmap
   files:
     - nginx-config.txt
+  literals:	
+    - from-literal=true
 
+# Create a Secret resource
 secretGenerator:
-- name: env_file_secret
-  env: env.txt
+- name: env-file-secret
+  env: env.txt 
   type: Opaque
+- name: certificate-secret
+  files:
+    - certificate.txt 
+- name: literal-secrets
+  literals:
+    - password=literal-password
+    - host=liternal-host
+
+
 # vars:
 #   - name: WORDPRESS_SERVICE
 #     objref:
