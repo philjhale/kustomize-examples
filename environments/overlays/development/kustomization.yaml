@@ -5,5 +5,12 @@ namePrefix: dev-
 patchesStrategicMerge:
 - replica-count-dev.yaml
 
+# Merge values from development.properties in the existing Config Map
+configMapGenerator:
+- name: example-configmap
+  behavior: merge
+  files:
+  - development.properties
+
 bases:
 - ../../base

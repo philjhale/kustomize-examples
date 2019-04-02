@@ -1,3 +1,9 @@
+# Generate a Config Map containing the values in common.properties
+configMapGenerator:
+- name: example-configmap
+  files:
+  - common.properties
+
 # List all source resources here. These will not be changed
 resources:
 - nginx-deployment.yaml

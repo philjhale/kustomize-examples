@@ -6,5 +6,12 @@ patchesStrategicMerge:
 - replica-count-prod.yaml
 - encryption.yaml
 
+# Merge values from production.properties in the existing Config Map
+configMapGenerator:
+- name: example-configmap
+  behavior: merge
+  files:
+  - production.properties
+
 bases:
 - ../../base
